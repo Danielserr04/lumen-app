@@ -1,0 +1,211 @@
+.dashboard-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dashboard-saludo {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.dashboard-saludo__hola {
+  font-size: 12px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-muted);
+}
+.dashboard-saludo__mes {
+  font-size: 19px;
+  font-weight: var(--peso-medium);
+  min-width: 108px;
+}
+.dashboard-saludo__selector-mes {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.dashboard-saludo__flecha {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border-min);
+  background: var(--glass-fill-min);
+  color: var(--color-texto-soft);
+  cursor: pointer;
+  transition: var(--transicion-control);
+  flex-shrink: 0;
+}
+.dashboard-saludo__flecha:hover:not(:disabled) {
+  background: var(--glass-fill-max);
+  color: var(--color-texto);
+}
+.dashboard-saludo__flecha:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+.dashboard-campana {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border-max);
+  background: var(--glass-fill-max);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.dashboard-campana__badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--color-gasto);
+  color: #fff;
+  font-size: 9px;
+  font-weight: var(--peso-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+}
+
+.dashboard-balance__cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dashboard-balance__etiqueta {
+  font-size: 11px;
+  font-weight: var(--peso-regular);
+  color: var(--color-texto-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.dashboard-balance__cifra {
+  display: block;
+  margin: 13px 0;
+  font-size: 40px;
+  font-weight: var(--peso-thin);
+  letter-spacing: -1px;
+  line-height: 1;
+}
+.dashboard-balance__progreso {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.dashboard-balance__pie {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-muted);
+}
+
+.dashboard-minicards {
+  display: flex;
+  gap: 10px;
+}
+.dashboard-minicard {
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 13px 15px !important;
+}
+.dashboard-minicard--ingreso {
+  border-color: rgba(74, 222, 168, 0.2) !important;
+}
+.dashboard-minicard--gasto {
+  border-color: rgba(255, 107, 122, 0.2) !important;
+}
+.dashboard-minicard__linea {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-muted);
+}
+.dashboard-minicard__cifra {
+  font-size: 18px;
+  font-weight: var(--peso-light);
+}
+
+.dashboard-aviso {
+  display: flex !important;
+  flex-direction: row;
+  gap: 11px;
+  align-items: center;
+  font-size: 12px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-soft);
+  line-height: 1.45;
+}
+
+.dashboard-linea {
+  display: flex !important;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px !important;
+}
+.dashboard-linea__cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.dashboard-linea__titulo {
+  font-size: 13px;
+  font-weight: var(--peso-medium);
+}
+.dashboard-linea__variacion {
+  font-size: 12px;
+  font-weight: var(--peso-regular);
+}
+
+.dashboard-recientes {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.dashboard-recientes__cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.dashboard-recientes__titulo {
+  font-size: 13px;
+  font-weight: var(--peso-medium);
+}
+.dashboard-recientes__ver-todos {
+  font-size: 11px;
+  font-weight: var(--peso-light);
+  color: var(--color-primario-link);
+  cursor: pointer;
+}
+.dashboard-recientes__esqueleto-fila {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+}
+
+.dashboard-fab {
+  position: fixed;
+  bottom: 96px;
+  right: 24px;
+  z-index: 50;
+}
+
+@media (min-width: 431px) {
+  .dashboard-fab {
+    position: absolute;
+  }
+}

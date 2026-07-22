@@ -1,0 +1,99 @@
+/*
+  Tokens de diseño de Lumen — §4 del handoff.
+  Valores literales, no aproximados. Si necesitas un valor que no está aquí,
+  revisa design_handoff_lumen_finanzas/README.md antes de inventarlo.
+*/
+
+:root {
+  /* Color base */
+  --color-fondo: #07080d;
+  --color-texto: #edeff5;
+  --color-texto-muted: #8b93a7;
+  --color-texto-dim: #5c6478;
+  --color-texto-soft: #a9b0c0;
+
+  /* Vidrio (glass) */
+  --glass-fill-min: rgba(255, 255, 255, 0.03);
+  --glass-fill-max: rgba(255, 255, 255, 0.05);
+  --glass-border-min: rgba(255, 255, 255, 0.08);
+  --glass-border-max: rgba(255, 255, 255, 0.14);
+
+  /* Marca / degradado primario */
+  --color-primario-a: #7c6cff;
+  --color-primario-b: #42d0f4;
+  --color-primario-link: #8f86ff;
+  --color-primario-link-hover: #b4adff;
+  --degradado-primario: linear-gradient(135deg, var(--color-primario-a), var(--color-primario-b));
+  --degradado-primario-barra: linear-gradient(90deg, var(--color-primario-a), var(--color-primario-b));
+  --degradado-primario-fondo: linear-gradient(160deg, rgba(124, 108, 255, 0.1), rgba(255, 255, 255, 0.03) 55%);
+
+  /* Semánticos */
+  --color-gasto: #ff6b7a;
+  --color-gasto-claro: #ff9aa5;
+  --color-ingreso: #4adea8;
+  --color-aviso: #ffc24b;
+  --color-aviso-claro: #ffd98a;
+
+  /* Categorías: icono + tinte rgb (usar rgba(var(--tint-x), alpha)) */
+  --tint-comida: 255, 163, 92;
+  --color-comida: #ffa35c;
+  --tint-transporte: 92, 179, 255;
+  --color-transporte: #5cb3ff;
+  --tint-ocio: 183, 140, 255;
+  --color-ocio: #b78cff;
+  --tint-suscripciones: 255, 127, 196;
+  --color-suscripciones: #ff7fc4;
+  --tint-salud: 79, 217, 208;
+  --color-salud: #4fd9d0;
+  --tint-tabaco: 176, 137, 104;
+  --color-tabaco: #b08968;
+  --tint-otros: 152, 162, 184;
+  --color-otros: #98a2b8;
+
+  /* Tipografía */
+  --fuente: "Outfit", sans-serif;
+  --peso-thin: 200;
+  --peso-light: 300;
+  --peso-regular: 400;
+  --peso-medium: 500;
+  --peso-semibold: 600;
+
+  --tam-cifra-grande: 56px; /* balance */
+  --tam-cifra-form: 48px; /* importe de formulario, rango 44–52 */
+  --tam-titulo-pantalla: 17px;
+  --tam-h1-landing: 40px;
+  --tam-cuerpo: 14px; /* rango 13–15 */
+  --tam-etiqueta: 12px; /* rango 11–12 */
+
+  /* Espaciado (escala de gap) */
+  --sp-1: 6px;
+  --sp-2: 8px;
+  --sp-3: 10px;
+  --sp-4: 14px;
+  --sp-5: 18px;
+  --sp-6: 24px;
+  --sp-7: 40px;
+  --sp-8: 64px;
+  --sp-9: 72px;
+
+  --padding-tarjeta: 28px; /* rango 28–32 */
+  --padding-fila: 14px; /* rango 13–14 */
+
+  /* Radios — esquinas casi afiladas */
+  --radio-chip: 4px;
+  --radio-input: 10px; /* rango 8–10 */
+  --radio-tarjeta: 8px;
+  --radio-marco-movil: 44px;
+  --radio-pill: 999px;
+
+  /* Desenfoque de vidrio */
+  --blur-glass: 24px; /* rango 20–32 */
+
+  /* Sombras */
+  --sombra-tarjeta: 0 24px 60px rgba(0, 0, 0, 0.4);
+  --sombra-movil: 0 40px 90px rgba(0, 0, 0, 0.6);
+  --sombra-cta: 0 16px 36px rgba(124, 108, 255, 0.35);
+
+  /* Duración estándar de transición de controles */
+  --transicion-control: all 0.2s;
+}

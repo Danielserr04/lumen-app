@@ -1,0 +1,99 @@
+.fab-expandible {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+/* absolute (no fixed): ancla al ancestro posicionado más cercano — `.pantalla`, ya
+   que `.fab-expandible` no tiene position propio — así cubre el marco del móvil
+   y no toda la ventana del navegador en el breakpoint de escritorio. */
+.fab-expandible__telon {
+  position: absolute;
+  inset: 0;
+  z-index: 45;
+}
+
+.fab-expandible__disco {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: var(--degradado-primario);
+  color: #0a0c13;
+  box-shadow: var(--sombra-cta);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.3, 1);
+}
+.fab-expandible__disco:active {
+  transform: scale(0.94);
+}
+
+.fab-expandible__icono-mas,
+.fab-expandible__icono-cerrar {
+  position: absolute;
+  display: flex;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.3, 1), opacity 0.2s ease;
+}
+.fab-expandible__icono-cerrar {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.6);
+}
+.fab-expandible__disco--abierto .fab-expandible__icono-mas {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.6);
+}
+.fab-expandible__disco--abierto .fab-expandible__icono-cerrar {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.fab-expandible__acciones {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  z-index: 50;
+}
+
+.fab-expandible__pildora {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px 10px 14px;
+  border-radius: 999px;
+  border: 1px solid;
+  backdrop-filter: blur(var(--blur-glass));
+  -webkit-backdrop-filter: blur(var(--blur-glass));
+  font-family: var(--fuente);
+  font-size: 13px;
+  font-weight: var(--peso-regular);
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+
+  opacity: 0;
+  transform: translateY(10px) scale(0.9);
+  pointer-events: none;
+  transition: opacity 0.22s cubic-bezier(0.22, 1, 0.3, 1), transform 0.22s cubic-bezier(0.22, 1, 0.3, 1);
+}
+
+.fab-expandible__acciones--abierto .fab-expandible__pildora {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fab-expandible__disco,
+  .fab-expandible__icono-mas,
+  .fab-expandible__icono-cerrar,
+  .fab-expandible__pildora {
+    transition: none !important;
+  }
+}

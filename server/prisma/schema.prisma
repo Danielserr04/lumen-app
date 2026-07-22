@@ -1,0 +1,222 @@
+// Esquema Prisma de Lumen — espejo exacto de src/types/entidades.ts (§8 del handoff).
+// Nombres de campo en snake_case tal cual el contrato TS, para que el JSON de respuesta
+// case con lo que ya consumen las pantallas sin transformar nada en el cliente HTTP.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Tema {
+  dark
+  light
+}
+
+enum TipoCuenta {
+  checking
+  card
+  cash
+}
+
+enum TipoCategoria {
+  expense
+  income
+}
+
+enum EstadoTransaccion {
+  cleared
+  pending
+}
+
+enum Frecuencia {
+  monthly
+  weekly
+  yearly
+}
+
+enum TipoNotificacion {
+  budget_alert
+  sync
+  insight
+}
+
+enum SeveridadNotificacion {
+  info
+  warning
+  error
+}
+
+model User {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  password_hash String
+  name          String
+  avatar_url    String?
+  locale        String   @default("es")
+  currency      String   @default("EUR")
+  theme         Tema     @default(dark)
+  avisos_activos Boolean @default(true)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  accounts      Account[]
+  categories    Category[]
+  transactions  Transaction[]
+  recurrings    Recurring[]
+  budgets       Budget[]
+  goals         SavingsGoal[]
+  notifications Notification[]
+}
+
+model Account {
+  id            String     @id @default(uuid())
+  user_id       String
+  user          User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  name          String
+  type          TipoCuenta
+  bank_name     String?
+  mask          String?
+  balance       Int        @default(0)
+  is_connected  Boolean    @default(false)
+  last_sync_at  DateTime?
+  created_at    DateTime   @default(now())
+
+  transactions  Transaction[]
+  recurrings    Recurring[]
+
+  @@index([user_id])
+}
+
+model Category {
+  id         String        @id @default(uuid())
+  user_id    String?
+  user       User?         @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  name       String
+  icon       String
+  color      String
+  tint       String
+  kind       TipoCategoria
+  is_system  Boolean       @default(false)
+  sort_order Int           @default(0)
+
+  transactions Transaction[]
+  recurrings   Recurring[]
+  budgets      Budget[]
+
+  @@index([user_id])
+}
+
+model Transaction {
+  id          String            @id @default(uuid())
+  user_id     String
+  user        User              @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  account_id  String
+  account     Account           @relation(fields: [account_id], references: [id])
+  category_id String?
+  category    Category?         @relation(fields: [category_id], references: [id])
+  amount      Int
+  currency    String            @default("EUR")
+  name        String
+  note        String?
+  date        DateTime
+  method      String?
+  status      EstadoTransaccion @default(cleared)
+  is_recurring Boolean          @default(false)
+  recurring_id String?
+  recurring    Recurring?       @relation(fields: [recurring_id], references: [id])
+  created_at  DateTime          @default(now())
+
+  // Campos §16 — resuelven las variantes E, G, I, K del informe §5.4.
+  transfer_id          String?
+  refund_of            String?
+  amount_original      Int?
+  currency_original    String?
+  fx_rate              Float?
+  installment_current  Int?
+  installment_total    Int?
+  deleted_at           DateTime?
+
+  notifications Notification[]
+
+  @@index([user_id, date])
+  @@index([category_id])
+  @@index([account_id])
+}
+
+model Recurring {
+  id               String     @id @default(uuid())
+  user_id          String
+  user             User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  category_id      String
+  category         Category   @relation(fields: [category_id], references: [id])
+  account_id       String
+  account          Account    @relation(fields: [account_id], references: [id])
+  name             String
+  amount           Int
+  frequency        Frecuencia
+  next_charge_date DateTime
+  start_date       DateTime
+  active           Boolean    @default(true)
+
+  // Campos §16 — financiación a plazos (caso K del informe §5.4).
+  installment_current Int?
+  installment_total   Int?
+
+  transactions Transaction[]
+
+  @@index([user_id, next_charge_date])
+}
+
+model Budget {
+  id              String   @id @default(uuid())
+  user_id         String
+  user            User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  category_id     String
+  category        Category @relation(fields: [category_id], references: [id])
+  limit_amount    Int
+  period          String   @default("monthly")
+  alert_threshold Float    @default(0.80)
+  start_date      DateTime
+
+  @@index([user_id, category_id, period])
+}
+
+model SavingsGoal {
+  id             String    @id @default(uuid())
+  user_id        String
+  user           User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  name           String
+  target_amount  Int
+  current_amount Int       @default(0)
+  deadline       DateTime?
+  color          String
+  icon           String
+  created_at     DateTime  @default(now())
+
+  @@index([user_id])
+}
+
+model Notification {
+  id                     String                 @id @default(uuid())
+  user_id                String
+  user                   User                   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  type                   TipoNotificacion
+  title                  String
+  body                   String
+  related_transaction_id String?
+  related_transaction    Transaction?           @relation(fields: [related_transaction_id], references: [id])
+  read                   Boolean                @default(false)
+  created_at             DateTime               @default(now())
+
+  // Campos §16
+  severity        SeveridadNotificacion @default(info)
+  action_type     String?
+  action_target_id String?
+
+  @@index([user_id, read])
+}

@@ -1,0 +1,135 @@
+.movimientos-titulo {
+  font-size: 19px;
+  font-weight: var(--peso-medium);
+}
+
+.movimientos-buscador-fila {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.movimientos-buscador-fila__campo {
+  flex: 1;
+}
+.movimientos-boton-filtro {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radio-input);
+  border: 1px solid var(--glass-border-min);
+  background: var(--glass-fill-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.movimientos-boton-filtro--activo {
+  border-color: rgba(124, 108, 255, 0.4);
+  background: rgba(124, 108, 255, 0.14);
+}
+
+.movimientos-chips-activos {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.movimientos-chip-activo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: var(--radio-pill);
+  background: rgba(124, 108, 255, 0.16);
+  border: 1px solid rgba(124, 108, 255, 0.5);
+  color: var(--color-primario-link-hover);
+  font-size: 12px;
+  font-weight: var(--peso-regular);
+}
+.movimientos-chip-activo svg {
+  cursor: pointer;
+}
+.movimientos-chip-limpiar {
+  padding: 7px 12px;
+  border-radius: var(--radio-pill);
+  border: 1px solid var(--glass-border-min);
+  color: var(--color-texto-muted);
+  font-size: 12px;
+  font-weight: var(--peso-light);
+  cursor: pointer;
+}
+
+.movimientos-esqueleto-fila {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 12px;
+}
+
+.movimientos-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.movimientos-hoja__titulo {
+  font-size: 14px;
+  font-weight: var(--peso-medium);
+}
+.movimientos-hoja__grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.movimientos-hoja__etiqueta {
+  font-size: 11px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-muted);
+}
+.movimientos-hoja__segmentos {
+  display: flex;
+  gap: 8px;
+}
+.movimientos-hoja__segmento {
+  flex: 1;
+  text-align: center;
+  padding: 9px;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border-min);
+  font-size: 12px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-muted);
+  cursor: pointer;
+}
+.movimientos-hoja__segmento--activo {
+  background: rgba(124, 108, 255, 0.16);
+  border-color: rgba(124, 108, 255, 0.5);
+  color: var(--color-primario-link-hover);
+  font-weight: var(--peso-regular);
+}
+
+.movimientos-hoja__chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.movimientos-hoja__fechas {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.movimientos-hoja__ayuda {
+  font-size: 11px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-muted);
+  margin-top: -8px;
+}
+
+.movimientos-hoja__acciones-calendario {
+  display: flex;
+  gap: 10px;
+}
+.movimientos-hoja__acciones-calendario .boton {
+  flex: 1;
+}

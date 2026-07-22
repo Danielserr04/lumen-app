@@ -1,0 +1,86 @@
+/* Lienzo de la app: en pantallas anchas simula el marco de móvil; en móvil real ocupa todo. */
+
+.lienzo-app {
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  background: #000;
+}
+
+.ventana-app {
+  width: 100%;
+  max-width: 430px;
+  /* Altura FIJA (no min-height): así el contenido interno hace scroll y la nav
+     inferior queda siempre anclada al fondo de la pantalla, nunca al fondo de la lista. */
+  height: 100dvh;
+  background: var(--color-fondo);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 431px) {
+  .lienzo-app {
+    align-items: center;
+    padding: 32px 0;
+  }
+  .ventana-app {
+    height: 844px;
+    max-height: 90vh;
+    border-radius: var(--radio-marco-movil);
+    border: 1px solid var(--glass-border-max);
+    box-shadow: var(--sombra-movil);
+  }
+}
+
+/* Blobs decorativos de fondo compartidos por varias pantallas (§ blobs por pantalla). */
+.blob-decorativo {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Contenedor estándar de pantalla: status bar ya la pone MarcoMovil real; aquí solo padding + scroll. */
+.pantalla {
+  position: relative;
+  flex: 1;
+  min-height: 0; /* permite que este panel encoja y haga scroll en vez de empujar la altura del marco */
+  overflow-y: auto;
+  overflow-x: hidden; /* si no se fija, overflow-y:auto lo convierte también en auto y aparece scroll lateral fantasma */
+  padding: 14px 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: screenIn 0.5s cubic-bezier(0.22, 1, 0.3, 1);
+  z-index: 1;
+}
+
+.pantalla--formulario {
+  padding: 10px 22px 20px;
+  gap: 18px;
+}
+
+.pantalla__cta-anclado {
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+/* Toasts (§13.1): apilados sobre la nav inferior, dentro del marco de la app. */
+.contenedor-toasts {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 200;
+  pointer-events: none;
+}
+.contenedor-toasts .toast {
+  pointer-events: auto;
+}

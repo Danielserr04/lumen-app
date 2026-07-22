@@ -1,0 +1,19 @@
+.tarjeta-glass {
+  border-radius: var(--radio-tarjeta);
+  border: 1px solid var(--glass-border-min);
+  background: var(--glass-fill-min);
+  backdrop-filter: blur(var(--blur-glass));
+  -webkit-backdrop-filter: blur(var(--blur-glass));
+  padding: var(--padding-tarjeta);
+  transition: var(--transicion-control);
+}
+
+.tarjeta-glass--pulsable {
+  cursor: pointer;
+}
+.tarjeta-glass--pulsable:hover {
+  background: var(--glass-fill-max);
+}
+.tarjeta-glass--pulsable:active {
+  transform: scale(0.99);
+}

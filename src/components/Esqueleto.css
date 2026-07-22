@@ -1,0 +1,5 @@
+.esqueleto {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05));
+  background-size: 200% 100%;
+  animation: gradFlow 1.4s ease-in-out infinite;
+}

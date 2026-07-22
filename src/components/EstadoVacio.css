@@ -1,0 +1,36 @@
+.estado-vacio {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.estado-vacio__icono {
+  width: 76px;
+  height: 76px;
+  border-radius: 18px;
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.estado-vacio__texto {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.estado-vacio__titulo {
+  font-size: 17px;
+  font-weight: var(--peso-medium);
+}
+.estado-vacio__descripcion {
+  font-size: 13px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-muted);
+  max-width: 260px;
+}

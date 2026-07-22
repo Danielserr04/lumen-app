@@ -1,0 +1,47 @@
+.fila-movimiento {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  border-radius: 4px;
+  transition: var(--transicion-control);
+}
+
+.fila-movimiento--pulsable {
+  cursor: pointer;
+}
+.fila-movimiento--pulsable:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.fila-movimiento__texto {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+
+.fila-movimiento__nombre {
+  font-size: 13px;
+  font-weight: var(--peso-regular);
+  color: var(--color-texto);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fila-movimiento__subtitulo {
+  font-size: 11px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fila-movimiento__importe {
+  font-size: 14px;
+  font-weight: var(--peso-light);
+  flex-shrink: 0;
+}

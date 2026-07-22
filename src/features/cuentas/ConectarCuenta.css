@@ -1,0 +1,74 @@
+.conectar-cuenta__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.conectar-cuenta__fila {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 14px;
+  border-radius: var(--radio-input);
+  border: 1px solid var(--glass-border-min);
+  background: var(--glass-fill-min);
+  cursor: pointer;
+  transition: var(--transicion-control);
+}
+.conectar-cuenta__fila:hover {
+  background: var(--glass-fill-max);
+}
+.conectar-cuenta__fila--conectada {
+  border-color: rgba(74, 222, 168, 0.3);
+  background: rgba(74, 222, 168, 0.06);
+  cursor: default;
+}
+
+.conectar-cuenta__icono {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radio-input);
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.conectar-cuenta__icono--verde {
+  background: rgba(74, 222, 168, 0.16);
+}
+
+.conectar-cuenta__texto {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+}
+.conectar-cuenta__nombre {
+  font-size: 14px;
+  font-weight: var(--peso-regular);
+}
+.conectar-cuenta__estado-verde {
+  font-size: 11px;
+  font-weight: var(--peso-light);
+  color: var(--color-ingreso);
+}
+
+.conectar-cuenta__spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(124, 108, 255, 0.3);
+  border-top-color: var(--color-primario-link);
+  animation: girar 0.8s linear infinite;
+}
+
+.conectar-cuenta__nota {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-dim);
+}

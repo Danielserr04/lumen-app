@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm -v)",
+      "Bash(docker --version)",
+      "Bash(npm --version)",
+      "PowerShell(docker --version)",
+      "PowerShell(docker compose version)",
+      "Bash(where.exe postgres.exe)"
+    ]
+  }
+}

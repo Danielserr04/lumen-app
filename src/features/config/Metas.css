@@ -1,0 +1,52 @@
+.meta-tarjeta {
+  display: flex !important;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px !important;
+}
+.meta-tarjeta__cabecera {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.meta-tarjeta__texto {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+}
+.meta-tarjeta__nombre {
+  font-size: 14px;
+  font-weight: var(--peso-medium);
+}
+.meta-tarjeta__fecha {
+  font-size: 11px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-muted);
+  text-transform: capitalize;
+}
+.meta-tarjeta__porcentaje {
+  font-size: 13px;
+  font-weight: var(--peso-regular);
+  color: var(--color-primario-link-hover);
+}
+.meta-tarjeta__pie {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-muted);
+}
+
+.meta-hoja__titulo {
+  font-size: 14px;
+  font-weight: var(--peso-medium);
+}
+
+.meta-hoja__acciones-calendario {
+  display: flex;
+  gap: 10px;
+}
+.meta-hoja__acciones-calendario .boton {
+  flex: 1;
+}

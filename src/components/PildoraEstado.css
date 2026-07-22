@@ -1,0 +1,10 @@
+.pildora-estado {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: var(--peso-medium);
+  border: 1px solid;
+  padding: 5px 14px;
+  border-radius: var(--radio-chip);
+  white-space: nowrap;
+}
+

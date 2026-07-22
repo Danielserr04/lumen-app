@@ -1,0 +1,117 @@
+.recurrentes-titulo {
+  font-size: 19px;
+  font-weight: var(--peso-medium);
+}
+
+.recurrentes-resumen {
+  display: flex !important;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 18px !important;
+}
+.recurrentes-resumen__texto {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.recurrentes-resumen__etiqueta {
+  font-size: 11px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.recurrentes-resumen__cifra {
+  font-size: 28px;
+  font-weight: var(--peso-thin);
+}
+.recurrentes-resumen__activas {
+  font-size: 11px;
+  font-weight: var(--peso-regular);
+  color: var(--color-suscripciones, #ff7fc4);
+}
+
+.recurrentes-fila {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  cursor: pointer;
+}
+.recurrentes-fila--sinpadding {
+  padding: 0 0 16px 0;
+}
+.recurrentes-fila__texto {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+}
+.recurrentes-fila__nombre {
+  font-size: 13px;
+  font-weight: var(--peso-regular);
+}
+.recurrentes-fila__sub {
+  font-size: 11px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-muted);
+}
+.recurrentes-fila__importe {
+  font-size: 14px;
+  font-weight: var(--peso-light);
+}
+.recurrentes-separador {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 0 12px;
+}
+
+.recurrentes-financiacion {
+  display: flex !important;
+  flex-direction: column;
+  gap: 11px;
+  padding: 16px 18px !important;
+}
+
+.recurrentes-seccion {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.recurrentes-seccion__cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.recurrentes-seccion__accion {
+  font-size: 11px;
+  font-weight: var(--peso-light);
+  color: var(--color-primario-link);
+  cursor: pointer;
+}
+
+.recurrentes-metas-vacio {
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-muted);
+  line-height: 1.4;
+}
+
+.recurrentes-fab {
+  position: fixed;
+  bottom: 96px;
+  right: 24px;
+  z-index: 50;
+}
+
+@media (min-width: 431px) {
+  .recurrentes-fab {
+    position: absolute;
+  }
+}

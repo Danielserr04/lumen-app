@@ -1,0 +1,204 @@
+/* Estilos compartidos por todos los campos de formulario de Lumen — §4 "Formularios y campos". */
+
+.etiqueta-campo {
+  font-size: 11px;
+  font-weight: var(--peso-regular);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-texto-dim);
+}
+.etiqueta-campo__opcional {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Importe hero */
+.importe-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+.importe-input__campo {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-texto);
+  font-family: var(--fuente);
+  font-size: 48px;
+  font-weight: var(--peso-thin);
+  letter-spacing: -1px;
+  text-align: center;
+  width: 100%;
+  min-width: 0;
+}
+.importe-input__pista {
+  font-size: 11px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-dim);
+}
+
+/* Fila de selección (Fecha, Cuenta, Periodo…) */
+.fila-seleccion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--padding-fila);
+  border-radius: var(--radio-input);
+  border: 1px solid var(--glass-border-min);
+  background: var(--glass-fill-min);
+  cursor: pointer;
+  transition: var(--transicion-control);
+}
+.fila-seleccion:hover {
+  background: var(--glass-fill-max);
+}
+.fila-seleccion__etiqueta {
+  font-size: 13px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-muted);
+}
+.fila-seleccion__valor {
+  font-size: 13px;
+  font-weight: var(--peso-regular);
+  color: var(--color-texto);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Campo de texto simple */
+.campo-texto {
+  padding: var(--padding-fila);
+  border-radius: var(--radio-input);
+  background: var(--glass-fill-min);
+  border: 1px solid var(--glass-border-min);
+  color: var(--color-texto);
+  font-family: var(--fuente);
+  font-size: 13px;
+  font-weight: var(--peso-regular);
+  outline: none;
+  transition: var(--transicion-control);
+  width: 100%;
+}
+.campo-texto::placeholder {
+  color: var(--color-texto-dim);
+  font-weight: var(--peso-light);
+}
+.campo-texto:focus {
+  border-color: rgba(124, 108, 255, 0.4);
+  background: rgba(124, 108, 255, 0.08);
+}
+.campo-texto--error {
+  border-color: rgba(255, 107, 122, 0.5);
+  background: rgba(255, 107, 122, 0.05);
+}
+
+textarea.campo-texto {
+  resize: none;
+  min-height: 52px;
+  font-family: var(--fuente);
+}
+
+/* Buscador */
+.campo-busqueda {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: var(--padding-fila);
+  border-radius: var(--radio-input);
+  background: var(--glass-fill-min);
+  border: 1px solid var(--glass-border-min);
+  transition: var(--transicion-control);
+}
+.campo-busqueda--activo {
+  border-color: rgba(124, 108, 255, 0.4);
+  background: rgba(124, 108, 255, 0.08);
+}
+.campo-busqueda__input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-texto);
+  font-family: var(--fuente);
+  font-size: 13px;
+  font-weight: var(--peso-regular);
+  min-width: 0;
+}
+.campo-busqueda__input::placeholder {
+  color: var(--color-texto-dim);
+  font-weight: var(--peso-light);
+}
+
+/* Error inline */
+.error-campo {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--color-gasto-claro);
+  font-size: 11px;
+  font-weight: var(--peso-regular);
+}
+
+/* Caja de insight */
+.caja-insight {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 13px 15px;
+  border-radius: var(--radio-tarjeta);
+  background: rgba(66, 208, 244, 0.06);
+  border: 1px solid rgba(66, 208, 244, 0.3);
+}
+.caja-insight--exito {
+  background: rgba(74, 222, 168, 0.06);
+  border-color: rgba(74, 222, 168, 0.3);
+}
+.caja-insight--aviso {
+  background: rgba(255, 194, 75, 0.06);
+  border-color: rgba(255, 194, 75, 0.3);
+}
+.caja-insight__texto {
+  font-size: 12px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-soft);
+  line-height: 1.45;
+}
+
+/* Slider */
+.control-slider {
+  position: relative;
+  height: 6px;
+  border-radius: var(--radio-pill);
+  background: rgba(255, 255, 255, 0.08);
+}
+.control-slider__relleno {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  border-radius: var(--radio-pill);
+  background: linear-gradient(90deg, #b78cff, #7c6cff);
+}
+.control-slider__thumb {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-texto);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+.control-slider__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  margin: 0;
+}

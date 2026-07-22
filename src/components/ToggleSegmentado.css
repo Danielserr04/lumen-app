@@ -1,0 +1,27 @@
+.toggle-segmentado {
+  display: flex;
+  padding: 4px;
+  border-radius: var(--radio-input);
+  background: var(--glass-fill-min);
+  border: 1px solid var(--glass-border-min);
+  gap: 0;
+}
+
+.toggle-segmentado__opcion {
+  flex: 1;
+  text-align: center;
+  padding: 9px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--color-texto-muted);
+  font-family: var(--fuente);
+  font-size: 13px;
+  font-weight: var(--peso-light);
+  cursor: pointer;
+  transition: var(--transicion-control);
+}
+
+.toggle-segmentado__opcion--activa {
+  font-weight: var(--peso-medium);
+}

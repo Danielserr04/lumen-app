@@ -1,0 +1,19 @@
+.chip-categoria {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radio-pill);
+  border: 1px solid var(--glass-border-min);
+  background: transparent;
+  color: var(--color-texto-soft);
+  font-family: var(--fuente);
+  font-size: 13px;
+  font-weight: var(--peso-regular);
+  cursor: pointer;
+  transition: var(--transicion-control);
+}
+
+.chip-categoria--seleccionada {
+  font-weight: var(--peso-regular);
+}

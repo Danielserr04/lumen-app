@@ -1,0 +1,196 @@
+.pantalla-onboarding {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.onboarding-blob {
+  position: absolute;
+  width: 440px;
+  height: 440px;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: floatA 24s ease-in-out infinite;
+}
+.onboarding-blob--paso0 {
+  top: -140px;
+  left: -40px;
+  background: radial-gradient(circle, rgba(124, 108, 255, 0.22), transparent 65%);
+}
+.onboarding-blob--paso1 {
+  top: -120px;
+  right: -40px;
+  background: radial-gradient(circle, rgba(74, 222, 168, 0.18), transparent 65%);
+  animation-name: floatB;
+}
+.onboarding-blob--paso2 {
+  top: -120px;
+  left: -40px;
+  background: radial-gradient(circle, rgba(255, 127, 196, 0.18), transparent 65%);
+  animation-name: floatC;
+}
+
+.onboarding-paso {
+  position: relative;
+  flex: 1;
+  padding: 24px 28px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 1;
+}
+.onboarding-paso--centrado {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 24px;
+}
+
+.onboarding-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: var(--degradado-primario);
+  box-shadow: 0 20px 44px rgba(124, 108, 255, 0.4);
+}
+
+.onboarding-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.onboarding-titulo {
+  font-size: 26px;
+  font-weight: var(--peso-medium);
+}
+.onboarding-descripcion {
+  font-size: 14px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-muted);
+  max-width: 280px;
+  line-height: 1.5;
+}
+
+.onboarding-nav-fila {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.onboarding-volver {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  padding: 0;
+  margin-left: -6px;
+}
+
+.onboarding-paso-label {
+  font-size: 12px;
+  font-weight: var(--peso-regular);
+  color: var(--color-texto-dim);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.onboarding-cabecera-paso {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.onboarding-titulo-paso {
+  font-size: 22px;
+  font-weight: var(--peso-medium);
+}
+.onboarding-subtitulo-paso {
+  font-size: 13px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-muted);
+  line-height: 1.5;
+}
+
+.onboarding-lista-bancos {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+.onboarding-fila-banco {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border-radius: var(--radio-input);
+  border: 1px solid var(--glass-border-min);
+  background: var(--glass-fill-min);
+  cursor: pointer;
+  transition: var(--transicion-control);
+}
+.onboarding-fila-banco:hover {
+  background: var(--glass-fill-max);
+}
+.onboarding-fila-banco__icono {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radio-input);
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.onboarding-fila-banco__nombre {
+  font-size: 14px;
+  font-weight: var(--peso-regular);
+  flex: 1;
+}
+
+.onboarding-importe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 20px 0;
+}
+.onboarding-importe__valor {
+  font-size: 48px;
+  font-weight: var(--peso-thin);
+  letter-spacing: -1px;
+}
+.onboarding-importe__pista {
+  font-size: 11px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-dim);
+}
+
+.onboarding-pie {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+.onboarding-enlace {
+  font-size: 12px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-dim);
+  cursor: pointer;
+}
+.onboarding-enlace--centrado {
+  text-align: center;
+  font-size: 13px;
+  font-weight: var(--peso-regular);
+  color: var(--color-primario-link);
+}
+
+.onboarding-puntos {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 6px;
+}
+.onboarding-punto {
+  height: 4px;
+  border-radius: 2px;
+  transition: var(--transicion-control);
+}

@@ -1,0 +1,47 @@
+.tarjeta-aviso {
+  border-radius: var(--radio-tarjeta);
+  border: 1px solid;
+  backdrop-filter: blur(var(--blur-glass));
+  -webkit-backdrop-filter: blur(var(--blur-glass));
+  padding: 20px 24px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: var(--transicion-control);
+}
+
+.tarjeta-aviso--pulsable {
+  cursor: pointer;
+}
+.tarjeta-aviso--pulsable:hover {
+  filter: brightness(1.08);
+}
+
+.tarjeta-aviso__icono {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radio-chip);
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tarjeta-aviso__texto {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tarjeta-aviso__titulo {
+  font-size: 15px;
+  font-weight: var(--peso-medium);
+}
+
+.tarjeta-aviso__cuerpo {
+  font-size: 13px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-soft);
+  line-height: 1.5;
+}

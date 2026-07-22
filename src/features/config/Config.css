@@ -1,0 +1,104 @@
+.config-titulo {
+  font-size: 19px;
+  font-weight: var(--peso-medium);
+}
+
+.config-perfil {
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+}
+.config-perfil__avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--degradado-primario);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: var(--peso-medium);
+  color: #07080d;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.config-perfil__avatar-imagen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.config-perfil__texto {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+}
+.config-perfil__nombre {
+  font-size: 14px;
+  font-weight: var(--peso-medium);
+}
+.config-perfil__email {
+  font-size: 11px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-muted);
+}
+
+.config-fila {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 12px;
+  cursor: pointer;
+}
+.config-fila__texto {
+  font-size: 13px;
+  font-weight: var(--peso-regular);
+  flex: 1;
+}
+.config-fila__valor {
+  font-size: 12px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-muted);
+}
+
+.config-toggle {
+  width: 36px;
+  height: 20px;
+  border-radius: var(--radio-pill);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  padding: 0 2px;
+  transition: var(--transicion-control);
+}
+.config-toggle--activo {
+  background: rgba(124, 108, 255, 0.5);
+  border-color: rgba(124, 108, 255, 0.7);
+  justify-content: flex-end;
+}
+.config-toggle__bola {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--color-texto);
+  display: inline-block;
+}
+
+.config-error {
+  font-size: 11px;
+  font-weight: var(--peso-light);
+  color: var(--color-gasto-claro);
+}
+
+.config-etiqueta-proximamente {
+  font-size: 10px;
+  font-weight: var(--peso-regular);
+  color: var(--color-texto-dim);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--glass-border-min);
+  border-radius: var(--radio-pill);
+  padding: 3px 8px;
+}

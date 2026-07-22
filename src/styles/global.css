@@ -1,0 +1,136 @@
+/*
+  Estilos globales de Lumen: reset, tipografía base, animaciones (§4 "Animaciones")
+  y soporte de prefers-reduced-motion.
+*/
+@import "./tokens.css";
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: var(--fuente);
+  font-weight: var(--peso-regular);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--color-primario-link);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--color-primario-link-hover);
+}
+
+button {
+  font-family: inherit;
+}
+
+/* Scroll sin barra visible dentro de los marcos de pantalla móvil */
+.sin-scrollbar {
+  scrollbar-width: none;
+}
+.sin-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---------- Animaciones (§4) ---------- */
+
+@keyframes floatA {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(120px, 80px) scale(1.12);
+  }
+  66% {
+    transform: translate(-60px, 140px) scale(0.94);
+  }
+}
+
+@keyframes floatB {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-140px, -90px) scale(1.15);
+  }
+}
+
+@keyframes floatC {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  40% {
+    transform: translate(90px, -70px) scale(1.1);
+  }
+  75% {
+    transform: translate(160px, 60px) scale(0.96);
+  }
+}
+
+@keyframes gradFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes screenIn {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes brilloCarga {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.clase-glass-animada {
+  background-size: 220% 220% !important;
+  animation: gradFlow 18s ease-in-out infinite;
+}
+
+/* Respeta la preferencia de movimiento reducido del sistema operativo */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

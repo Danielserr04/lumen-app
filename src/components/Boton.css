@@ -1,0 +1,108 @@
+.boton {
+  border: none;
+  cursor: pointer;
+  font-family: var(--fuente);
+  font-weight: var(--peso-medium);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--transicion-control);
+  white-space: nowrap;
+}
+
+.boton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none !important;
+}
+
+.boton:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.boton--ancho-completo {
+  width: 100%;
+}
+
+/* Tamaños */
+.boton--grande {
+  padding: 15px 28px;
+  border-radius: var(--radio-input);
+  font-size: 14px;
+}
+.boton--medio {
+  padding: 12px 22px;
+  border-radius: var(--radio-input);
+  font-size: 13px;
+}
+.boton--pequeno {
+  padding: 9px 16px;
+  border-radius: var(--radio-tarjeta);
+  font-size: 13px;
+}
+
+/* Variante primaria (CTA) */
+.boton--primario {
+  background: var(--degradado-primario);
+  color: #0a0c13;
+  box-shadow: var(--sombra-cta);
+}
+.boton--primario:hover:not(:disabled) {
+  filter: brightness(1.06);
+}
+
+/* Variante secundaria (glass) */
+.boton--secundario {
+  background: var(--glass-fill-max);
+  color: var(--color-texto);
+  border: 1px solid var(--glass-border-max);
+  backdrop-filter: blur(var(--blur-glass));
+  -webkit-backdrop-filter: blur(var(--blur-glass));
+}
+.boton--secundario:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Variante terciaria (texto) */
+.boton--terciario {
+  background: transparent;
+  color: var(--color-primario-link);
+  padding: 10px 12px;
+}
+.boton--terciario:hover:not(:disabled) {
+  color: var(--color-primario-link-hover);
+}
+
+/* Ghost / fila-acción */
+.boton--ghost {
+  background: transparent;
+  color: var(--color-texto-soft);
+  font-weight: var(--peso-regular);
+}
+.boton--ghost:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Destructivo */
+.boton--destructivo {
+  background: rgba(255, 107, 122, 0.1);
+  color: var(--color-gasto-claro);
+  border: 1px solid rgba(255, 107, 122, 0.4);
+  border-radius: var(--radio-tarjeta);
+}
+.boton--destructivo:hover:not(:disabled) {
+  background: rgba(255, 107, 122, 0.16);
+}
+
+/* Icono redondo (FAB) */
+.boton--icono-redondo {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--degradado-primario);
+  color: #0a0c13;
+  box-shadow: var(--sombra-cta);
+  font-size: 24px;
+  padding: 0;
+}

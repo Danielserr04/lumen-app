@@ -1,0 +1,24 @@
+.formulario-presupuesto__selector-categoria {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border-radius: var(--radio-input);
+  border: 1px solid;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: var(--peso-regular);
+}
+
+.formulario-presupuesto__importe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 0;
+}
+.formulario-presupuesto__cifra {
+  font-size: 44px;
+  font-weight: var(--peso-thin);
+  letter-spacing: -1px;
+}

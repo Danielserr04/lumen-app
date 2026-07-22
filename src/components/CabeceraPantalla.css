@@ -1,0 +1,23 @@
+.cabecera-pantalla {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.cabecera-pantalla__nav {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  padding: 0;
+}
+
+.cabecera-pantalla__titulo {
+  font-size: 17px;
+  font-weight: var(--peso-medium);
+  flex: 1;
+}
+.cabecera-pantalla__titulo--centrado {
+  text-align: center;
+}

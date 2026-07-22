@@ -1,0 +1,206 @@
+.analisis-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.analisis-titulo {
+  font-size: 19px;
+  font-weight: var(--peso-medium);
+}
+
+.analisis-rangos {
+  display: flex;
+  gap: 6px;
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border-min);
+  background: var(--glass-fill-min);
+}
+.analisis-rango {
+  padding: 5px 11px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-muted);
+  cursor: pointer;
+}
+.analisis-rango--activo {
+  background: rgba(124, 108, 255, 0.18);
+  color: var(--color-primario-link-hover);
+  font-weight: var(--peso-regular);
+}
+
+.analisis-seccion {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.analisis-seccion__titulo {
+  font-size: 13px;
+  font-weight: var(--peso-medium);
+}
+
+/* Hero: gráfico de flujo combinado */
+.analisis-hero {
+  display: flex !important;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px !important;
+}
+.analisis-hero__cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.analisis-hero__texto {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.analisis-hero__etiqueta {
+  font-size: 11px;
+  font-weight: var(--peso-regular);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-texto-muted);
+}
+.analisis-hero__cifra {
+  font-size: 32px;
+  font-weight: var(--peso-thin);
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+.analisis-hero__variacion {
+  font-size: 14px;
+  font-weight: var(--peso-medium);
+}
+.analisis-hero__leyenda {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+}
+.analisis-hero__leyenda span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-soft);
+}
+.analisis-hero__leyenda i {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  display: inline-block;
+}
+.analisis-hero__leyenda-linea {
+  width: 12px !important;
+  height: 2px !important;
+  border-radius: 1px !important;
+  background: var(--degradado-primario);
+}
+
+/* Donut con leyenda en píldoras — a la derecha, no debajo */
+.analisis-donut-tarjeta {
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  padding: 22px !important;
+}
+.analisis-donut-tarjeta .grafico-donut {
+  flex-shrink: 0;
+}
+.analisis-donut-pildoras {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: 7px;
+  flex: 1;
+  min-width: 0;
+}
+.analisis-donut-pildora {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid;
+  font-size: 11px;
+  font-weight: var(--peso-regular);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Insights: lista vertical de tarjetas de aviso, una debajo de otra */
+.analisis-insights-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Top comercios: rejilla 2 columnas (2x3 para 6 items), sin scroll lateral */
+.analisis-comercios-carrusel {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.analisis-comercio-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 13px 14px;
+  border-radius: var(--radio-tarjeta);
+  border: 1px solid var(--glass-border-min);
+  background: var(--glass-fill-min);
+  cursor: pointer;
+  transition: var(--transicion-control);
+  min-width: 0;
+}
+.analisis-comercio-stat:hover {
+  background: var(--glass-fill-max);
+}
+.analisis-comercio-stat__nombre {
+  font-size: 12px;
+  font-weight: var(--peso-regular);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.analisis-comercio-stat__total {
+  font-size: 17px;
+  font-weight: var(--peso-thin);
+}
+.analisis-comercio-stat__veces {
+  font-size: 10px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-muted);
+}
+
+/* Presupuestos */
+.analisis-presupuesto-fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px 6px;
+  cursor: pointer;
+}
+.analisis-presupuesto-fila__texto {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 12px;
+  font-weight: var(--peso-regular);
+}
+.analisis-presupuesto-fila__cifras {
+  font-size: 11px;
+  font-weight: var(--peso-light);
+  color: var(--color-texto-muted);
+}
+.analisis-presupuesto-fila__pct {
+  font-size: 13px;
+  font-weight: var(--peso-medium);
+}
+.analisis-presupuesto-fila__barra {
+  padding: 0 12px 10px;
+}

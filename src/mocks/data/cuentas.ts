@@ -1,0 +1,40 @@
+import type { Account } from "@/types/entidades";
+
+export const cuentas: Account[] = [
+  {
+    id: "acc-visa",
+    user_id: "user-1",
+    name: "Visa ·· 4821",
+    type: "card",
+    bank_name: "Banco Sabadell",
+    mask: "·· 4821",
+    balance: 128450,
+    is_connected: true,
+    last_sync_at: "2026-07-18T07:58:00.000Z",
+    created_at: "2023-01-10T09:00:00.000Z",
+  },
+  {
+    id: "acc-cuenta",
+    user_id: "user-1",
+    name: "Cuenta ·· 0093",
+    type: "checking",
+    bank_name: "Banco Sabadell",
+    mask: "·· 0093",
+    balance: 342000,
+    is_connected: true,
+    last_sync_at: "2026-07-18T07:58:00.000Z",
+    created_at: "2023-01-10T09:00:00.000Z",
+  },
+  {
+    id: "acc-efectivo",
+    user_id: "user-1",
+    name: "Efectivo",
+    type: "cash",
+    bank_name: null,
+    mask: null,
+    balance: 6000,
+    is_connected: false,
+    last_sync_at: null,
+    created_at: "2023-03-02T09:00:00.000Z",
+  },
+];

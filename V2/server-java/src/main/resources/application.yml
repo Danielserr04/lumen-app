@@ -1,0 +1,40 @@
+server:
+  port: ${PORT:3001}
+
+spring:
+  application:
+    name: lumen-backend
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME:}
+    password: ${SPRING_DATASOURCE_PASSWORD:}
+    hikari:
+      maximum-pool-size: 5
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: false
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    # El esquema "public" de Supabase ya tiene tablas de Prisma (nombres en mayúscula,
+    # sin colisión con las nuestras en minúscula) — baseline evita que Flyway aborte solo
+    # por no estar vacío. En el corte a producción (Fase B) se dropean esas tablas viejas.
+    baseline-on-migrate: true
+    baseline-version: 0
+
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
+lumen:
+  jwt:
+    secret: ${JWT_SECRET}
+    expiration-days: 30
+  cors:
+    origin: ${CORS_ORIGIN:*}

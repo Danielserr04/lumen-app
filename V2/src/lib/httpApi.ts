@@ -223,6 +223,13 @@ export const apiAuth = {
   async cambiarContrasena(actual: string, nueva: string): Promise<void> {
     await post("/auth/change-password", { actual, nueva });
   },
+  /**
+   * Pide el enlace de restablecimiento. El backend responde siempre `ok` exista o no la
+   * cuenta, a propósito: así la pantalla no revela qué emails están registrados.
+   */
+  async recuperarContrasena(email: string): Promise<void> {
+    await post("/auth/forgot-password", { email });
+  },
 };
 
 export function haySesion(): boolean {
@@ -258,7 +265,8 @@ export const apiNotificaciones = {
 
 // ===================== §15 Endpoints derivados / analítica =====================
 
-interface PuntoHistoricoApi {
+/** Un mes de la serie histórica de `/analytics/cashflow` (§15). */
+export interface PuntoHistorico {
   mes: string;
   etiqueta: string;
   ingresos: number;
@@ -273,7 +281,7 @@ export const apiAnalitica = {
   async gastoPorCategoria(periodo: string): Promise<GastoPorCategoria[]> {
     return get(`/analytics/by-category${qs({ period: periodo })}`);
   },
-  async cashflowHistorico(): Promise<PuntoHistoricoApi[]> {
+  async cashflowHistorico(): Promise<PuntoHistorico[]> {
     return get(`/analytics/cashflow${qs({ range: 6 })}`);
   },
   async topComercios(periodo: string, limite = 5): Promise<ComercioFrecuente[]> {

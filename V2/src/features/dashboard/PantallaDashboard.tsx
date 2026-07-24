@@ -14,19 +14,13 @@ import { GraficoLinea } from "@/components/graficos/GraficoLinea";
 import { Sparkline } from "@/components/graficos/Sparkline";
 import { formatearEuros, formatearMesAnio, formatearPorcentaje } from "@/lib/formato";
 import { periodoActual } from "@/lib/periodo";
-import { apiAnalitica, apiMovimientos, apiNotificaciones, apiPresupuestos } from "@/mocks/api";
+import { apiAnalitica, apiAuth, apiMovimientos, apiNotificaciones, apiPresupuestos } from "@/mocks/api";
 import { usarCategorias } from "@/lib/usarCategorias";
 import { trazarLineaSuave, puntoFinal } from "@/lib/trazarLinea";
-import { historicoMensual } from "@/mocks/data/historico";
 import type { ResumenMensual } from "@/lib/derivar";
-import type { Transaction, BudgetDerivado, Recurring } from "@/types/entidades";
+import type { PuntoHistorico } from "@/lib/httpApi";
+import type { Transaction, BudgetDerivado, Recurring, User } from "@/types/entidades";
 import "./Dashboard.css";
-
-const VALORES_BALANCE = historicoMensual.map((p) => p.balanceDisponible);
-const ETIQUETAS_HISTORICO = historicoMensual.map((p) => p.etiqueta);
-const VARIACION_BALANCE = Math.round(
-  ((VALORES_BALANCE[VALORES_BALANCE.length - 1] - VALORES_BALANCE[0]) / VALORES_BALANCE[0]) * 100,
-);
 
 const ETIQUETA_ESTADO = { ok: "Vas bien", warning: "Cuidado", over: "Te queda poco" } as const;
 const SEVERIDAD_ESTADO = { ok: "ok", warning: "warning", over: "error" } as const;
@@ -43,6 +37,8 @@ export function PantallaDashboard() {
   const [recientes, setRecientes] = useState<Transaction[]>([]);
   const [presupuestos, setPresupuestos] = useState<BudgetDerivado[]>([]);
   const [proximosCargos, setProximosCargos] = useState<Recurring[]>([]);
+  const [historico, setHistorico] = useState<PuntoHistorico[]>([]);
+  const [usuario, setUsuario] = useState<User | null>(null);
   const [noLeidas, setNoLeidas] = useState(0);
   const [cargando, setCargando] = useState(true);
   const { visual, porId } = usarCategorias();
@@ -55,6 +51,11 @@ export function PantallaDashboard() {
     f.setMonth(f.getMonth() + desfaseMeses);
     return f;
   })();
+
+  // El nombre del usuario no depende del mes elegido, así que se pide una sola vez.
+  useEffect(() => {
+    apiAuth.me().then(setUsuario).catch(() => setUsuario(null));
+  }, []);
 
   useEffect(() => {
     const marcarOnline = () => setOnline(true);
@@ -76,15 +77,26 @@ export function PantallaDashboard() {
       apiNotificaciones.contarNoLeidas(),
       apiPresupuestos.listar(periodo),
       apiAnalitica.recurrentesProximos(),
-    ]).then(([r, movs, contador, presu, proximos]) => {
+      apiAnalitica.cashflowHistorico(),
+    ]).then(([r, movs, contador, presu, proximos, hist]) => {
       setResumen(r);
       setRecientes(movs.filter((m) => periodoActual(new Date(m.date)) === periodo).slice(0, 4));
       setNoLeidas(contador);
       setPresupuestos(presu);
       setProximosCargos(proximos);
+      setHistorico(hist);
       setCargando(false);
     });
   }, [desfaseMeses]);
+
+  // Serie de los últimos meses (§15). Antes salía de fixtures fijos, así que la gráfica
+  // enseñaba siempre lo mismo; ahora viene de /analytics/cashflow como la de Análisis.
+  const valoresBalance = historico.map((p) => p.balanceDisponible);
+  const etiquetasHistorico = historico.map((p) => p.etiqueta);
+  const variacionBalance =
+    valoresBalance.length > 1 && valoresBalance[0] !== 0
+      ? Math.round(((valoresBalance[valoresBalance.length - 1] - valoresBalance[0]) / valoresBalance[0]) * 100)
+      : 0;
 
   const presupuestoSuperado = presupuestos.find((b) => b.state === "over");
   const presupuestoAjustado = !presupuestoSuperado ? presupuestos.find((b) => b.state === "warning") : undefined;
@@ -99,7 +111,7 @@ export function PantallaDashboard() {
       {!online && <Banner severidad="offline" texto="Sin conexión · mostrando datos guardados" />}
       <div className="dashboard-cabecera">
         <div className="dashboard-saludo">
-          <span className="dashboard-saludo__hola">Hola, Marta</span>
+          <span className="dashboard-saludo__hola">{usuario ? `Hola, ${usuario.name.split(" ")[0]}` : "Hola"}</span>
           <div className="dashboard-saludo__selector-mes">
             <button
               type="button"
@@ -153,7 +165,7 @@ export function PantallaDashboard() {
       {!cargando && resumen && (
         <div className="dashboard-minicards">
           <TarjetaGlass fondo="rgba(74,222,168,0.05)" className="dashboard-minicard dashboard-minicard--ingreso">
-            <Sparkline valores={historicoMensual.map((p) => p.ingresos)} color="#4ADEA8" />
+            <Sparkline valores={historico.map((p) => p.ingresos)} color="#4ADEA8" />
             <div className="dashboard-minicard__linea">
               <ArrowDownLeft size={13} color="#4ADEA8" />
               <span>Ingresos</span>
@@ -163,7 +175,7 @@ export function PantallaDashboard() {
             </span>
           </TarjetaGlass>
           <TarjetaGlass fondo="rgba(255,107,122,0.05)" className="dashboard-minicard dashboard-minicard--gasto">
-            <Sparkline valores={historicoMensual.map((p) => p.gastos)} color="#FF6B7A" />
+            <Sparkline valores={historico.map((p) => p.gastos)} color="#FF6B7A" />
             <div className="dashboard-minicard__linea">
               <ArrowUpRight size={13} color="#FF6B7A" />
               <span>Gastos</span>
@@ -204,7 +216,8 @@ export function PantallaDashboard() {
         />
       )}
 
-      {!cargando && (
+      {/* Con un solo mes de datos no hay serie que trazar, así que la tarjeta no se pinta. */}
+      {!cargando && valoresBalance.length > 1 && (
         <TarjetaGlass
           animada
           fondo="linear-gradient(120deg, rgba(124,108,255,0.18), rgba(143,134,255,0.10) 40%, rgba(66,208,244,0.14) 75%)"
@@ -212,15 +225,15 @@ export function PantallaDashboard() {
         >
           <div className="dashboard-linea__cabecera">
             <span className="dashboard-linea__titulo">Balance entre meses</span>
-            <span className="dashboard-linea__variacion" style={{ color: VARIACION_BALANCE >= 0 ? "var(--color-ingreso)" : "var(--color-gasto)" }}>
-              {VARIACION_BALANCE >= 0 ? "+" : ""}
-              {VARIACION_BALANCE}% vs {ETIQUETAS_HISTORICO[0].toLowerCase()}
+            <span className="dashboard-linea__variacion" style={{ color: variacionBalance >= 0 ? "var(--color-ingreso)" : "var(--color-gasto)" }}>
+              {variacionBalance >= 0 ? "+" : ""}
+              {variacionBalance}% vs {etiquetasHistorico[0].toLowerCase()}
             </span>
           </div>
           <GraficoLinea
-            puntosPath={trazarLineaSuave(VALORES_BALANCE)}
-            etiquetas={ETIQUETAS_HISTORICO}
-            marcadorFinal={puntoFinal(VALORES_BALANCE)}
+            puntosPath={trazarLineaSuave(valoresBalance)}
+            etiquetas={etiquetasHistorico}
+            marcadorFinal={puntoFinal(valoresBalance)}
           />
         </TarjetaGlass>
       )}

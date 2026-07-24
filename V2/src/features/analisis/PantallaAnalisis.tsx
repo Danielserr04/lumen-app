@@ -13,7 +13,7 @@ import { apiAnalitica, apiPresupuestos } from "@/mocks/api";
 import { usarCategorias } from "@/lib/usarCategorias";
 import type { GastoPorCategoria, ComercioFrecuente, InsightAnalisis } from "@/lib/derivar";
 import type { BudgetDerivado } from "@/types/entidades";
-import type { PuntoHistorico } from "@/mocks/data/historico";
+import type { PuntoHistorico } from "@/lib/httpApi";
 import "./Analisis.css";
 
 const RANGOS = [

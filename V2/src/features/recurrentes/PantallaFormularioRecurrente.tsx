@@ -7,7 +7,7 @@ import { CampoTexto } from "@/components/campos/CampoTexto";
 import { EtiquetaCampo } from "@/components/campos/EtiquetaCampo";
 import { ToggleSegmentado, type OpcionToggle } from "@/components/ToggleSegmentado";
 import { Boton } from "@/components/Boton";
-import type { Frecuencia } from "@/types/entidades";
+import type { Account, Frecuencia } from "@/types/entidades";
 import { apiRecurrentes, apiCuentas } from "@/mocks/api";
 import { usarToasts } from "@/lib/ContextoToasts";
 import { usarCategorias } from "@/lib/usarCategorias";
@@ -38,7 +38,13 @@ export function PantallaFormularioRecurrente() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { mostrar } = usarToasts();
-  const { idPorToken } = usarCategorias();
+  const { idPorToken, porId } = usarCategorias();
+  const [cuentas, setCuentas] = useState<Account[]>([]);
+
+  // El formulario todavía no deja elegir categoría ni cuenta, así que se fijan por defecto:
+  // "Suscripciones" (o "Otros" si no existiera) y la primera cuenta del usuario.
+  const categoriaPorDefecto = porId(idPorToken("suscripciones") ?? idPorToken("otros"));
+  const cuentaPorDefecto = cuentas[0];
 
   const [tipo, setTipo] = useState<TipoRecurrente>(searchParams.get("tipo") === "financiacion" ? "financiacion" : "suscripcion");
   const [nombre, setNombre] = useState("");
@@ -47,6 +53,10 @@ export function PantallaFormularioRecurrente() {
   const [cuotasTotales, setCuotasTotales] = useState("12");
   const [activo, setActivo] = useState(true);
   const [guardando, setGuardando] = useState(false);
+
+  useEffect(() => {
+    apiCuentas.listar().then(setCuentas);
+  }, []);
 
   useEffect(() => {
     if (modoEditar) {
@@ -91,12 +101,7 @@ export function PantallaFormularioRecurrente() {
       });
       mostrar("exito", "Cambios guardados");
     } else {
-      // Una recurrente necesita categoría y cuenta reales. Por ahora el formulario no las
-      // pide, así que se usan las de por defecto: "Suscripciones" (o "Otros" si no está) y
-      // la primera cuenta del usuario.
-      const idCategoria = idPorToken("suscripciones") ?? idPorToken("otros");
-      const cuentas = await apiCuentas.listar();
-      if (!idCategoria || cuentas.length === 0) {
+      if (!categoriaPorDefecto || !cuentaPorDefecto) {
         mostrar("error", "Falta una categoría o una cuenta para crear la recurrente");
         setGuardando(false);
         return;
@@ -104,8 +109,8 @@ export function PantallaFormularioRecurrente() {
       await apiRecurrentes.crear({
         name: nombre,
         amount: -centimos,
-        category_id: idCategoria,
-        account_id: cuentas[0].id,
+        category_id: categoriaPorDefecto.id,
+        account_id: cuentaPorDefecto.id,
         frequency: FRECUENCIAS[frecuenciaIdx].valor,
         start_date: ahora,
         next_charge_date: ahora,
@@ -147,8 +152,10 @@ export function PantallaFormularioRecurrente() {
       <ImporteInput valorTexto={importeTexto} onCambiar={setImporteTexto} pista={tipo === "financiacion" ? "Importe de cada cuota" : undefined} />
 
       <div className="formulario-movimiento__filas">
-        <FilaSeleccion etiqueta="Categoría" valor={tipo === "financiacion" ? "Sin categoría" : "Suscripciones"} />
-        <FilaSeleccion etiqueta="Cuenta" valor="Visa ·· 4821" />
+        {/* Informativas: el formulario aún no deja elegirlas, pero al menos enseñan lo que
+            de verdad se va a guardar en vez de un nombre fijo del prototipo. */}
+        <FilaSeleccion etiqueta="Categoría" valor={categoriaPorDefecto?.name ?? "Suscripciones"} />
+        <FilaSeleccion etiqueta="Cuenta" valor={cuentaPorDefecto?.name ?? "Tu cuenta principal"} />
         <FilaSeleccion
           etiqueta="Frecuencia"
           valor={FRECUENCIAS[frecuenciaIdx].etiqueta}

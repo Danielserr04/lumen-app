@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as PhosphorIcons from "@phosphor-icons/react";
 import { CabeceraPantalla } from "@/components/CabeceraPantalla";
 import { IconoConHalo } from "@/components/IconoConHalo";
 import { ToggleSegmentado } from "@/components/ToggleSegmentado";
@@ -11,16 +10,13 @@ import { apiCategorias } from "@/mocks/api";
 import { usarToasts } from "@/lib/ContextoToasts";
 import "../movimientos/FormularioMovimiento.css";
 import "./FormularioCategoria.css";
+import { iconoPorNombre } from "@/lib/iconos";
 
 const ICONOS_DISPONIBLES = [
   "fork-knife", "gas-pump", "popcorn", "arrows-clockwise", "heartbeat", "dots-three-circle",
   "airplane-tilt", "gift", "book-open", "paw-print", "house-line", "baby",
 ];
 const COLORES_DISPONIBLES = ["#FFA35C", "#5CB3FF", "#B78CFF", "#FF7FC4", "#4FD9D0", "#98A2B8", "#4ADEA8", "#FF6B7A"];
-
-function nombreComponenteIcono(kebab: string): string {
-  return kebab.split("-").map((p) => p[0].toUpperCase() + p.slice(1)).join("");
-}
 
 /** Nueva/Editar categoría (§12.6): nombre, icono, color, tipo — con preview en vivo. */
 export function PantallaFormularioCategoria() {
@@ -75,7 +71,7 @@ export function PantallaFormularioCategoria() {
         <EtiquetaCampo>Icono</EtiquetaCampo>
         <div className="formulario-categoria__grid-iconos">
           {ICONOS_DISPONIBLES.map((nombreIcono) => {
-            const Comp = (PhosphorIcons as unknown as Record<string, PhosphorIcons.Icon>)[nombreComponenteIcono(nombreIcono)];
+            const Comp = iconoPorNombre(nombreIcono);
             const seleccionado = icono === nombreIcono;
             return (
               <button

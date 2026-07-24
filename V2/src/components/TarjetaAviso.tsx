@@ -1,13 +1,6 @@
-import * as PhosphorIcons from "@phosphor-icons/react";
 import { hexARgba, aclararHex } from "@/lib/color";
 import "./TarjetaAviso.css";
-
-function nombreComponenteIcono(nombreKebab: string): string {
-  return nombreKebab
-    .split("-")
-    .map((parte) => parte.charAt(0).toUpperCase() + parte.slice(1))
-    .join("");
-}
+import { iconoPorNombre } from "@/lib/iconos";
 
 interface PropsTarjetaAviso {
   /** Nombre de icono Phosphor en kebab-case (p.ej. "warning", "calendar-blank", "piggy-bank"). */
@@ -26,7 +19,7 @@ interface PropsTarjetaAviso {
  * la lista compacta de notificaciones (§14.1, que usa `FilaMovimiento`/filas propias).
  */
 export function TarjetaAviso({ icono, color, titulo, cuerpo, onClick }: PropsTarjetaAviso) {
-  const ComponenteIcono = (PhosphorIcons as unknown as Record<string, PhosphorIcons.Icon>)[nombreComponenteIcono(icono)];
+  const ComponenteIcono = iconoPorNombre(icono);
   return (
     <div
       className={`tarjeta-aviso ${onClick ? "tarjeta-aviso--pulsable" : ""}`}

@@ -20,6 +20,11 @@ export interface User {
   locale: Locale;
   currency: Moneda;
   theme: Tema;
+  /**
+   * Preferencia "Avisos inteligentes" (§5.12). Vive en el servidor porque es él quien la
+   * consulta antes de generar cualquier notificación (§13.5), no la UI.
+   */
+  avisos_activos: boolean;
   created_at: string;
   updated_at: string;
 }

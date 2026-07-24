@@ -7,14 +7,14 @@ import { CajaInsight } from "@/components/campos/CajaInsight";
 import { apiAuth } from "@/mocks/api";
 import "./Auth.css";
 
-/** Recuperar contraseña (§12.8): email → mensaje de confirmación mock. */
+/** Recuperar contraseña (§12.8): email → enlace de restablecimiento. */
 export function PantallaRecuperar() {
   const [email, setEmail] = useState("");
   const [enviado, setEnviado] = useState(false);
 
   async function enviar() {
     if (!email.includes("@")) return;
-    await apiAuth.login(email, ""); // mock: no valida credenciales, solo simula el envío
+    await apiAuth.recuperarContrasena(email);
     setEnviado(true);
   }
 

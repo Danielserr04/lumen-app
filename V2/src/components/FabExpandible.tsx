@@ -1,12 +1,8 @@
 import { useState } from "react";
-import * as PhosphorIcons from "@phosphor-icons/react";
 import { Plus, X } from "@phosphor-icons/react";
 import { hexARgba } from "@/lib/color";
 import "./FabExpandible.css";
-
-function nombreComponenteIcono(kebab: string): string {
-  return kebab.split("-").map((p) => p[0].toUpperCase() + p.slice(1)).join("");
-}
+import { iconoPorNombre } from "@/lib/iconos";
 
 export interface AccionFab {
   icono: string; // nombre Phosphor en kebab-case
@@ -44,7 +40,7 @@ export function FabExpandible({ acciones, ariaLabel = "Añadir", className }: Pr
       {abierto && <div className="fab-expandible__telon" onClick={() => setAbierto(false)} />}
       <div className={`fab-expandible__acciones ${abierto ? "fab-expandible__acciones--abierto" : ""}`}>
         {acciones.map((accion, i) => {
-          const ComponenteIcono = (PhosphorIcons as unknown as Record<string, PhosphorIcons.Icon>)[nombreComponenteIcono(accion.icono)];
+          const ComponenteIcono = iconoPorNombre(accion.icono);
           return (
             <button
               key={accion.etiqueta}

@@ -1,6 +1,6 @@
-import * as PhosphorIcons from "@phosphor-icons/react";
 import type { DefinicionCategoria } from "@/theme/tokens";
 import "./ChipCategoria.css";
+import { iconoPorNombre } from "@/lib/iconos";
 
 interface PropsChipCategoria {
   categoria: DefinicionCategoria;
@@ -10,22 +10,12 @@ interface PropsChipCategoria {
   tamanoIcono?: number;
 }
 
-/** Convierte "fork-knife" (nombre Phosphor kebab-case) a "ForkKnife" (export del paquete). */
-function nombreComponenteIcono(nombreKebab: string): string {
-  return nombreKebab
-    .split("-")
-    .map((parte) => parte.charAt(0).toUpperCase() + parte.slice(1))
-    .join("");
-}
-
 /**
  * Chip seleccionable de categoría (§4): pill 999px con icono + texto, tintado con el
  * color de la categoría cuando está seleccionado.
  */
 export function ChipCategoria({ categoria, seleccionada = false, onClick, tamanoIcono = 14 }: PropsChipCategoria) {
-  const ComponenteIcono = (PhosphorIcons as unknown as Record<string, PhosphorIcons.Icon>)[
-    nombreComponenteIcono(categoria.icono)
-  ];
+  const ComponenteIcono = iconoPorNombre(categoria.icono);
 
   return (
     <button

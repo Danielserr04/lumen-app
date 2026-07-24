@@ -45,7 +45,7 @@ export function PantallaFormularioMovimiento() {
   const [importeTexto, setImporteTexto] = useState("");
   const [categoriaId, setCategoriaId] = useState<string | null>(null);
   const [nota, setNota] = useState("");
-  const [cuentaId, setCuentaId] = useState<string>("acc-visa");
+  const [cuentaId, setCuentaId] = useState<string>("");
   const [cuentas, setCuentas] = useState<Account[]>([]);
   const [comercio, setComercio] = useState("");
   const [fecha, setFecha] = useState(new Date());
@@ -55,7 +55,12 @@ export function PantallaFormularioMovimiento() {
   const [guardando, setGuardando] = useState(false);
 
   useEffect(() => {
-    apiCuentas.listar().then(setCuentas);
+    // Al crear, la primera cuenta del usuario es la preseleccionada. Antes había un id fijo
+    // ("acc-visa") que no existe fuera de los mocks: el backend rechazaba el alta entera.
+    apiCuentas.listar().then((lista) => {
+      setCuentas(lista);
+      if (!modoEditar) setCuentaId((actual) => actual || lista[0]?.id || "");
+    });
     if (modoEditar) {
       apiMovimientos.obtener(id!).then((tx) => {
         setTipo(tx.amount < 0 ? "expense" : "income");

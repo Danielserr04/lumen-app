@@ -15,14 +15,28 @@ export function PantallaConfig() {
   const [avisos, setAvisos] = useState(leerAvisosActivos());
 
   useEffect(() => {
-    apiAuth.me().then(setUsuario);
+    apiAuth.me().then((u) => {
+      setUsuario(u);
+      // Manda el servidor: es su `avisos_activos` el que consulta NotificationService antes
+      // de generar nada (§13.5). El localStorage queda solo para pintar el toggle al vuelo
+      // sin esperar a /me.
+      setAvisos(u.avisos_activos);
+      establecerAvisosActivos(u.avisos_activos);
+    });
     apiCuentas.listar().then((c) => setNumCuentas(c.length));
   }, []);
 
-  function alternarAvisos() {
+  async function alternarAvisos() {
     const activos = !avisos;
     setAvisos(activos);
     establecerAvisosActivos(activos);
+    try {
+      await apiAuth.actualizarMe({ avisos_activos: activos });
+    } catch {
+      // Si el guardado falla, se revierte: mejor eso que enseñar un toggle que miente.
+      setAvisos(!activos);
+      establecerAvisosActivos(!activos);
+    }
   }
 
   return (

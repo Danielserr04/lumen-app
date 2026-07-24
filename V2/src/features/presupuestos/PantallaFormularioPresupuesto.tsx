@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CaretDown } from "@phosphor-icons/react";
-import * as PhosphorIcons from "@phosphor-icons/react";
 import { CabeceraPantalla } from "@/components/CabeceraPantalla";
 import { FilaSeleccion } from "@/components/campos/FilaSeleccion";
 import { Slider } from "@/components/campos/Slider";
@@ -13,6 +12,7 @@ import { formatearEurosSinDecimales } from "@/lib/formato";
 import { apiPresupuestos } from "@/mocks/api";
 import { usarToasts } from "@/lib/ContextoToasts";
 import { usarCategorias } from "@/lib/usarCategorias";
+import { iconoPorNombre } from "@/lib/iconos";
 import "../movimientos/FormularioMovimiento.css";
 import "./FormularioPresupuesto.css";
 
@@ -27,9 +27,7 @@ export function PantallaFormularioPresupuesto() {
   const [guardando, setGuardando] = useState(false);
 
   const categoria = listaCategorias[indiceCategoria];
-  const ComponenteIcono = (PhosphorIcons as unknown as Record<string, PhosphorIcons.Icon>)[
-    categoria.icono.split("-").map((p) => p[0].toUpperCase() + p.slice(1)).join("")
-  ];
+  const ComponenteIcono = iconoPorNombre(categoria.icono);
 
   async function guardar() {
     const idCategoria = idPorToken(categoria.id);

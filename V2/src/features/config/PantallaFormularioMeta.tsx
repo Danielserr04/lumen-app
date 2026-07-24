@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as PhosphorIcons from "@phosphor-icons/react";
 import { CabeceraPantalla } from "@/components/CabeceraPantalla";
 import { IconoConHalo } from "@/components/IconoConHalo";
 import { ImporteInput } from "@/components/campos/ImporteInput";
@@ -15,6 +14,7 @@ import { usarToasts } from "@/lib/ContextoToasts";
 import "../movimientos/FormularioMovimiento.css";
 import "../config/FormularioCategoria.css";
 import "./Metas.css";
+import { iconoPorNombre } from "@/lib/iconos";
 
 const COLORES = ["#42D0F4", "#4ADEA8", "#7C6CFF", "#FF7FC4", "#FFC24B"];
 
@@ -33,10 +33,6 @@ const ICONOS_META = [
   "paw-print",
   "laptop",
 ];
-
-function nombreComponenteIcono(kebab: string): string {
-  return kebab.split("-").map((p) => p[0].toUpperCase() + p.slice(1)).join("");
-}
 
 function formatearFechaLimite(fecha: Date): string {
   return fecha.toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" });
@@ -91,7 +87,7 @@ export function PantallaFormularioMeta() {
         <EtiquetaCampo>Icono</EtiquetaCampo>
         <div className="formulario-categoria__grid-iconos">
           {ICONOS_META.map((nombreIcono) => {
-            const Comp = (PhosphorIcons as unknown as Record<string, PhosphorIcons.Icon>)[nombreComponenteIcono(nombreIcono)];
+            const Comp = iconoPorNombre(nombreIcono);
             const seleccionado = icono === nombreIcono;
             return (
               <button

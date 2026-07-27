@@ -1,0 +1,38 @@
+# Blueprint de Render para el backend Java (Spring Boot 3 + Postgres/Supabase).
+#
+# Cómo se usa: en Render → "New" → "Blueprint" → se elige este repo. Render lee este
+# fichero y crea el servicio con toda la configuración ya puesta; solo quedan por
+# rellenar a mano las tres variables marcadas con `sync: false` (las de Supabase), que
+# a propósito NO viven en el repo.
+#
+# El servicio se llama `lumen-api` y no `lumen-backend` para no pisar el servicio Node
+# que sigue existiendo en Render. Son dos servicios distintos conviviendo: cuando el
+# nuevo responda bien, se apunta el frontend a su URL (VITE_API_URL) y se apaga el viejo.
+services:
+  - type: web
+    name: lumen-api
+    runtime: docker
+    plan: free
+    region: frankfurt
+    rootDir: V2/server-java
+    dockerfilePath: ./Dockerfile
+    # /health está en la lista blanca de SecurityConfig, así que responde sin token.
+    healthCheckPath: /health
+    envVars:
+      # Las tres de Supabase: Render las pide al crear el blueprint y las guarda cifradas.
+      # La URL tiene que llevar el puerto 5432 (sesión), no el 6543 — ver server-java/.env.example.
+      - key: SPRING_DATASOURCE_URL
+        sync: false
+      - key: SPRING_DATASOURCE_USERNAME
+        sync: false
+      - key: SPRING_DATASOURCE_PASSWORD
+        sync: false
+      # Lo genera Render: no hace falta inventarlo ni copiarlo de ningún sitio.
+      # Al cambiar de secreto caducan todas las sesiones abiertas (aquí da igual: el
+      # backend Node firmaba otro claim, así que ya iban a caducar de todos modos).
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGIN
+        value: https://lumen-dsc-labs-projects.vercel.app
+# PORT no se declara aposta: Render inyecta el suyo y application.yml lo lee
+# con ${PORT:3001}. Fijarlo a mano hace que el health check no encuentre el servicio.
